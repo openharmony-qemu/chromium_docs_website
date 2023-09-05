@@ -1,0 +1,10 @@
+[
+    {
+        "Name": "chromium_docs_website",                   # 上游开源软件名全称
+        "License":          # 上游开源软件中包含的许可证信息
+        "License File": "LICENSE"       # 许可证所在文件路径
+        "Version Number": "ed52cd24ed88168a014780720690306e15cf8dd5",
+        "Upstream URL": "https://chromium.googlesource.com/website.git@6ed52cd24ed88168a014780720690306e15cf8dd5",   # 上游软件包发布地址
+        "Description": "第三方软件vulkan-deps/glslang"           # 开源软件功能描述
+    }
+]
