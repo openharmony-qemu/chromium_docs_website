@@ -14,6 +14,40 @@
             <filefilter name="defaultFilter">
                 <filteritem type="filepath" name="README.OpenSource"
                     desc="" />
+                <filteritem type="filepath" name=".*plist"
+                    desc="" />
+                <filteritem type="filepath" name=".*sha1"
+                    desc="" />
+                <filteritem type="filepath" name=".*eleventy.js"
+                    desc="" />
+                <filteritem type="filepath" name="servo.*"
+                    desc="" />
+                <filteritem type="filepath" name=".*gitignore.backup"
+                    desc="" />
+                <filteritem type="filepath" name="infra.*"
+                    desc="" />
+                <filteritem type="filepath" name=".*firebaserc"
+                    desc="" />
+                <filteritem type="filepath" name=".*OWNERS"
+                    desc="" />
+                <filteritem type="filepath" name="site.*"
+                    desc="" />
+                <filteritem type="filepath" name=".*vpython3"
+                    desc="" />
+                <filteritem type="filepath" name="scripts.*"
+                    desc="" />
+                <filteritem type="filepath" name=".*AUTHORS"
+                    desc="" />
+                <filteritem type="filepath" name=".*LICENSE"
+                    desc="" />
+                <filteritem type="filepath" name=".*PRESUBMIT.py"
+                    desc="" />
+                <filteritem type="filepath" name=".*gclient"
+                    desc="" />
+                <filteritem type="filepath" name=".*DEPS"
+                    desc="" />
+                <filteritem type="filepath" name=".*npmw"
+                    desc="" />
             </filefilter>
         </filefilterlist>
         <licensematcherlist>
