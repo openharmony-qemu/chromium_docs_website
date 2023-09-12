@@ -1,6 +1,6 @@
 [
     {
-        "Name": "chromium_docs_website",                   # 上游开源软件名全称
+        "Name": "website",                   # 上游开源软件名全称
         "License":          # 上游开源软件中包含的许可证信息
         "License File": "LICENSE"       # 许可证所在文件路径
         "Version Number": "ed52cd24ed88168a014780720690306e15cf8dd5",
