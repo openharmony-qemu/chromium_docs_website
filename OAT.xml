@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <oatconfig>
+        <licensefile>site/chromium-os/servo/LICENSE</licensefile> 
         <policylist>
             <policy name="projectPolicy" desc="">
             </policy>
@@ -37,8 +38,6 @@
                 <filteritem type="filepath" name="scripts.*"
                     desc="" />
                 <filteritem type="filepath" name=".*AUTHORS"
-                    desc="" />
-                <filteritem type="filepath" name=".*LICENSE"
                     desc="" />
                 <filteritem type="filepath" name=".*PRESUBMIT.py"
                     desc="" />
