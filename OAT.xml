@@ -65,7 +65,6 @@ used to filter file path.
             <policy name="projectPolicy" desc="">
                 <policyitem type="compatibility" name="MIT" path="site/_stylesheets/_reset.scss" desc="经法务确认为宽松型许可证" />
                 <policyitem type="compatibility" name="CC-BY-3.0" path="site/chromium-os/servo/LICENSE" desc="经法务确认为宽松型许可证" />
-
                 <policyitem type="compatibility" name="GPLStyleLicense" path="site/chromium-os/getting-started-with-glmark2/glmark2-9999.ebuild" desc="经法务确认,涉及文件在render下进行了隔离" />
             </policy>
         </policylist>
