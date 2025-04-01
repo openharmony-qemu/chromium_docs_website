@@ -26,9 +26,7 @@ title: For Developers
             commands.
 *   Look at our [Git
             Cookbook](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/git_cookbook.md)
-            for a helpful walk-through, or the [Fast Intro to Git
-            Internals](/developers/fast-intro-to-git-internals) for a background
-            intro to git.
+            for a helpful walk-through.
 *   [Changelogs for Chromium and Blink](/developers/change-logs).
 
 #### Development Guides
@@ -54,8 +52,6 @@ title: For Developers
 *   [Generated files](/developers/generated-files)
 *   [Chromoting (Chrome Remote Desktop)
             compilation](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/chromoting_build_instructions.md)
-*   [Updating module
-            dependencies](/developers/how-tos/chromium-modularization)
 *   [Editing
             dictionaries](/developers/how-tos/editing-the-spell-checking-dictionaries)
 *   Editors Guides
@@ -144,7 +140,7 @@ See also: All [How-tos](/developers/how-tos).
             documentation](https://chromium.googlesource.com/infra/infra/+/HEAD/doc/index.md)
 *   [Contacting a
             Trooper](https://chromium.googlesource.com/infra/infra/+/HEAD/doc/users/contacting_troopers.md)
-            
+
 
 ### Performance
 
@@ -167,8 +163,7 @@ See also: All [How-tos](/developers/how-tos).
     *   Windows-specific issues can be profiled with
                 [UIforETW](https://randomascii.wordpress.com/2015/09/01/xperf-basics-recording-a-trace-the-ultimate-easy-way/)
     *   [Leak Detection](/developers/leak-detection)
-*   [Perf
-            Sheriffing](http://www.chromium.org/developers/tree-sheriffs/perf-sheriffs)
+*   [Perf Sheriffing](/developers/tree-sheriffs/perf-sheriffs)
 
 ### Sync
 
@@ -197,7 +192,7 @@ See also: All [How-tos](/developers/how-tos).
 *   [Core Product Principles](/developers/core-principles)
     *   [No Hidden
                 Preferences](/developers/core-principles/no-hidden-preferences)
-*   [Contributing code](/developers/contributing-code)
+*   [Contributing code](https://chromium.googlesource.com/chromium/src/+/main/docs/contributing.md)
     *   [Coding style](/developers/coding-style)
         *   [C++ Dos and
                     Don'ts](/developers/coding-style/cpp-dos-and-donts)
@@ -240,7 +235,6 @@ Design documents
 
 *   [Getting around the source code
             directories](/developers/how-tos/getting-around-the-chrome-source-code)
-*   [Tech Talks: Videos & Presentations](/developers/tech-talk-videos)
 *   [Engineering design docs](/developers/design-documents)
 *   [User experience design docs](/user-experience)
 *   *Sharing design documents on Google drive: share on Chromium domain*

@@ -48,7 +48,7 @@ design docs in the coming months.**
 ### Firmware
 
 *   [CBI: CrOS Board
-            Info](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/design_docs/cros_board_info.md)
+            Info](/chromium-os/developer-library/reference/device/cros-board-info/)
 *   [Firmware Boot and
             Recovery](/chromium-os/chromiumos-design-docs/firmware-boot-and-recovery)
 *   [Disk Format](/chromium-os/chromiumos-design-docs/disk-format)
@@ -90,8 +90,9 @@ design docs in the coming months.**
             Overview](/chromium-os/chromiumos-design-docs/chrome-os-battery-life-overview)
 *   [Performance
             Overview](/chromium-os/chromiumos-design-docs/chrome-os-performance-overview)
-*   [Printing](http://www.chromium.org/chromium-os/chromiumos-design-docs/chromium-os-printing-design)
+*   [Printing](/chromium-os/chromiumos-design-docs/chromium-os-printing-design)
 *   [Text Input](/chromium-os/chromiumos-design-docs/text-input)
+*   [Timekeeping](/chromium-os/chromiumos-design-docs/timekeeping)
 *   [User Accounts and
             Management](/chromium-os/chromiumos-design-docs/user-accounts-and-management)
 *   [CRAS: ChromeOS Audio

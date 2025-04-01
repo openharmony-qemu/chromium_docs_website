@@ -33,7 +33,7 @@ You can then follow the instructions on that page.
 4.  Click **Stop Logging** button.
 5.  Provide the resulting log file to the bug investigator.
     *   Either attach the file to your existing or [new bug
-                report](https://crbug.com/new), or send email to the bug
+                report](https://issues.chromium.org/new), or send email to the bug
                 investigator.
     *   Provide the **entire** log file. Snippets are rarely sufficient
                 to diagnose problems.
@@ -74,6 +74,12 @@ information" is needed, one of the following flags can be used:
 
 *   --net-log-capture-mode=IncludeSensitive
 *   --net-log-capture-mode=Everything
+
+(As of M117) You can limit the maximum size of the log file using
+`--net-log-max-size-mb` and specify the max size in megabytes. For example,
+the following will limit the max log size to 100 MB:
+
+*   --net-log-max-size-mb=100
 
 For info about adding command line options, see
 [command-line-flags](/developers/how-tos/run-chromium-with-flags).

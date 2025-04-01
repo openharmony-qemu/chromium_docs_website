@@ -39,7 +39,7 @@ Follow the steps in [Chromium's Gerrit Guide](/developers/gerrit-guide).
 2.  Go to <http://google.com/> and verify you are logged into your
             @google.com account
 3.  In the same window and session, load
-            <https://chrome-internal.googlesource.com/new-password>
+            <https://www.googlesource.com/new-password>
     1.  **Make sure you are logged into your @google.com account.**
     2.  **You can verify this by ensuring that the Username field looks
                 like git-&lt;user&gt;.google.com**
@@ -65,7 +65,7 @@ must link your accounts to have proper access in Gerrit.
 ## **Using Gerrit**
 
 Check out the [Contributing
-Guide](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/contributing.md)
+Guide](/chromium-os/developer-library/guides/development/contributing/)
 for using Gerrit and getting through the Chromium OS review process.
 
 ## More Gerrit Tips

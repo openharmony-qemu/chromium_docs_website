@@ -11,148 +11,110 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+"""Generic collection of functions and objects used by different scripts."""
 import dataclasses
 import multiprocessing
 import os
 import queue
 import sys
-import threading
 import time
 import urllib.parse
 
-
-site = 'https://www.chromium.org'
-
+# The absolute path to the top of the repo.
 REPO_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
+# The absolute path to the directory containing the content.
 SITE_DIR = os.path.join(REPO_DIR, 'site')
-BUILD_DIR = os.path.join(REPO_DIR, 'build')
-DEFAULT_TEMPLATE = '/_includes/page.html'
 
 
+def walk(top):
+    """Returns a list of all the files found under the `top` directory
 
-alternates = [
-    site,
-    'http://dev.chromium.org',
-    'https://dev.chromium.org',
-    'https://sites.google.com/a/chromium.org/dev',
-    'https://ssl.gstatic.com/sites/p/058338',
-    'http://www.gstatic.com/sites/p/058338',
-]
-
-
-def read_text_file(path):
-    return read_binary_file(path).decode('utf-8')
-
-
-def read_binary_file(path):
-    with open(path, 'rb') as fp:
-        return fp.read()
-
-
-def write_binary_file(path, content):
-    with open(path, 'wb') as fp:
-        return fp.write(content)
-
-def write_text_file(path, content):
-    with open(path, 'w') as fp:
-        return fp.write(content)
-
-def read_paths(path):
-    paths = set()
-    with open(path) as fp:
-        for line in fp.readlines():
-            idx = line.find('#')
-            if idx != -1:
-                line = line[:idx]
-            line = line.strip()
-            if line:
-                paths.add(line)
-    return paths
-
-
-def to_path(page, top=SITE_DIR, ext='.md'):
-    page = page.strip()
-    if page == '/':
-        page = ''
-    if os.path.isdir(top + page):
-        return page + '/index' + ext
-    if os.path.exists(top + page):
-        return page
-    if ext and os.path.exists(top + page + ext):
-        return page + ext
-    return page
-
-
-def walk(top, skip=None):
-    skip = skip or set()
+    This routine is a simplified wrapper around `os.walk`. It walks the
+    top directory and all its subdirectories to gather the list of files.
+    """
     paths = set()
     for dirpath, dnames, fnames in os.walk(top):
         for dname in dnames:
             rpath = os.path.relpath(os.path.join(dirpath, dname), top)
-            if rpath in skip or dname.startswith('.'):
+            if dname.startswith('.'):
                 dnames.remove(dname)
         for fname in fnames:
             rpath = os.path.relpath(os.path.join(dirpath, fname), top)
-            if rpath in skip or fname.startswith('.'):
+            if fname.startswith('.'):
                 continue
             paths.add(rpath)
     return sorted(paths)
 
 
-def write_if_changed(path, content, mode='wb', encoding='utf-8'):
-    if mode == 'w':
-        content = content.encode(encoding)
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    if os.path.exists(path):
-        with open(path, 'rb') as fp:
-            old_content = fp.read()
-            if content == old_content:
-                return False
-    write_binary_file(path, content)
-    return True
-
-
-def should_update(dest_page, source_pages):
-    if not os.path.exists(dest_page):
-        return True
-
-    dest_pages = [dest_page]
-    max_source_mtime = max(os.stat(p).st_mtime for p in source_pages)
-    max_dest_mtime = max(os.stat(p).st_mtime for p in dest_pages)
-    return max_source_mtime > max_dest_mtime 
-
-
 class JobQueue:
-    def __init__(self, handler, jobs, multiprocess=None):
+    """Single-writer/multiple-reader job processor.
+
+    The processor will spawn off multiple processes to
+    handle the requests given it in parallel. The caller should
+    create the JobQueue(), enqueue all of the requests to make with `request()`,
+    and then repeatedly call `results` to retrieve the results of each job.
+
+    Each subprocess will retrieve a job, process it using the provided
+    `handler` routine, and return the result. If `jobs` > 1, the results
+    may be returned out of order.
+    """
+
+    def __init__(self, handler, jobs):
+        """Initialize the JobQueue.
+
+        `handler` specifies the routine to be invoked for each job.
+        The handler will be invoked with the task and obj that it was
+        handed in request().
+
+        `jobs` indicates the number of jobs to process in parallel.
+        """
+
         self.handler = handler
         self.jobs = jobs
         self.pending = set()
         self.started = set()
         self.finished = set()
-        if multiprocess is None:
-            self.multiprocess = (jobs > 1)
-        else:
-            self.multiprocess = multiprocess
-        if self.multiprocess:
-            self._request_q = multiprocessing.Queue()
-            self._response_q = multiprocessing.Queue()
-        else:
-            self._request_q = queue.Queue()
-            self._response_q = queue.Queue()
+        self._request_q = multiprocessing.Queue()
+        self._response_q = multiprocessing.Queue()
         self._start_time = None
-        self._threads = []
+        self._procs = []
         self._last_msg = None
         self._isatty = sys.stdout.isatty()
 
     def all_tasks(self):
+        """Returns a list of all tasks requested so far.
+
+        The list contains all of the `task` strings that were passed
+        to request(). All of the tasks are returned regardless of the
+        state they are in (not started, running, or completed)."""
         return self.pending | self.started | self.finished
 
     def request(self, task, obj):
+        """Sends a job request to the job processor.
+
+        `task` should consist of a human-readable string that will be
+        printed out while the processor is running, and `obj` should
+        be another arbitrary picklable object that can be passed to the
+        handler along with `task`.
+        """
         self.pending.add(task)
         self._request_q.put(('handle', task, obj))
 
     def results(self):
+        """Returns the results of one job.
+
+        `results` acts as a generator to return job results, returning
+        the results one at a time. The results may be not be in the
+        same order that the requests were.
+
+        The job-processor will print its progress in a simplified Ninja-like
+        format while the results are being returned. If the program is printing
+        to a tty-like object, you will get a single line of output with
+        task numbers and names. If the program is printing to a non-tty-like
+        object, it will print the results one line at a time.
+        """
+
         self._start_time = time.time()
         self._spawn()
 
@@ -167,26 +129,21 @@ class JobQueue:
             else:
                 raise AssertionError
 
-        for _ in self._threads:
+        for _ in self._procs:
             self._request_q.put(('exit', None, None))
-        for thread in self._threads:
-            thread.join()
+        for proc in self._procs:
+            proc.join()
         if self._isatty:
             print()
 
     def _spawn(self):
         args = (self._request_q, self._response_q, self.handler)
         for i in range(self.jobs):
-            if self.multiprocess:
-                thread = multiprocessing.Process(target=_worker,
-                                                 name='worker-%d' % i,
-                                                 args=args)
-            else:
-                thread = threading.Thread(target=_worker,
-                                          name='worker-%d' % i,
-                                          args=args)
-            self._threads.append(thread)
-            thread.start()
+            proc = multiprocessing.Process(target=_worker,
+                                           name='worker-%d' % i,
+                                           args=args)
+            self._procs.append(proc)
+            proc.start()
 
     def _mark_started(self, task):
         self.pending.remove(task)
@@ -222,13 +179,17 @@ class JobQueue:
 
 
 def _worker(request_q, response_q, handler):
+    'Routine invoked repeatedly in the subprocesses to process the jobs.'
     while True:
         message, task, obj = request_q.get()
+
+        assert message in ('exit', 'handle'), (
+            "Unknown message type '%s'" % message)
+
         if message == 'exit':
             break
-        elif message == 'handle':
-            response_q.put(('started', task, '', None))
-            res, resp = handler(task, obj)
-            response_q.put(('finished', task, res, resp))
-        else:
-            raise AssertionError
+
+        # message == 'handle':
+        response_q.put(('started', task, '', None))
+        res, resp = handler(task, obj)
+        response_q.put(('finished', task, res, resp))
