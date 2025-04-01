@@ -33,7 +33,7 @@ FAQ.](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/security/faq.md
 These are the criteria that we expect from a good security bug report:
 
 *   Was filed via the [security
-            template](https://code.google.com/p/chromium/issues/entry?template=Security%20Bug).
+            template](https://issues.chromium.org/issues/new?component=1363614&template=1922342).
 *   Contains a clear and descriptive title.
 *   Includes the Chromium/Chrome version number and [release
             channel](/getting-involved/dev-channel).
@@ -77,9 +77,9 @@ information on bugs that trigger browser crashes or sad tabs:
                 Bug](/for-testers/bug-reporting-guidelines/reporting-crash-bug).
     *   Platform specific debugger configuration (including instructions
                 on setting up symbols) is available for
-                [Windows](/developers/how-tos/debugging), [Mac OS
-                X](/developers/debugging-on-os-x), and
-                [Linux](https://code.google.com/p/chromium/wiki/LinuxDebugging).
+                [Windows](/developers/how-tos/debugging-on-windows), [Mac OS
+                X](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/mac/debugging.md),
+                [Linux](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/linux/debugging.md), and [Android](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/android_debugging_instructions.md).
 *   If crash reporting is enabled, please provide your [client
             ID](/for-testers/bug-reporting-guidelines/reporting-crash-bug).
 *   Please ensure that **all stack traces include symbols**.
@@ -120,7 +120,7 @@ for a larger award:
 *   Any noteworthy cooperation in the reporting and resolution that goes
             significantly beyond the normal reporting guidelines.
 *   We reward more where the reporter [provides a good analysis
-            demonstrating probable exploitability](/system/errors/NodeNotFound).
+            demonstrating probable exploitability](https://crbug.com/1307610).
 
 ### Bug Visibility
 

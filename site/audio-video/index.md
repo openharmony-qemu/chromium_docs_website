@@ -26,7 +26,7 @@ audio/video](/developers/design-documents/video).
 
 Container formats
 
-*   MP4 (QuickTime/ MOV / MPEG4)
+*   MP4 (QuickTime/ MOV / ISO-BMFF / CMAF)
 *   Ogg
 *   WebM
 *   WAV
@@ -46,22 +46,17 @@ Codec formats (Decode Only)
 *   PCM μ-law
 *   Vorbis
 
-*   AAC \[Main, LC, HE profiles only, xHE-AAC on Android P+\] \[Google
+*   AAC \[Main, LC, HE profiles only, xHE-AAC on Android P+, macOS, Windows 11\] \[Google
             Chrome only\]
 
 ==Video==
 
+*   AV1
 *   VP8
 *   VP9
 
-*   AV1 \[Only Chrome OS, Linux, macOS, and Windows at present\]
-
-*   Theora \[Except on Android variants\]
-
 *   H.264 \[Google Chrome only\]
 *   H.265 \[Google Chrome only and only where supported by the underlying OS\]
-
-*   MPEG-4 \[Google Chrome OS only\]
 
 ### Code Location
 

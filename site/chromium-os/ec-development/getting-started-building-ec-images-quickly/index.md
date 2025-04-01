@@ -35,9 +35,8 @@ steps to setup a minimal development environment to build EC images from the
 Chromium OS chroot:
 
 1.  Create a folder for your chroot (ex. *mkdir cros-src; cd cros-src*)
-2.  Run *repo init -u
-            https://chromium.googlesource.com/chromiumos/manifest.git --repo-url
-            https://chromium.googlesource.com/external/repo.git -g minilayout*
+2.  Run *repo init https://chromium.googlesource.com/chromiumos/manifest.git
+            -g minilayout*
 3.  Edit .repo/manifest.xml, and add *groups="minilayout"* to the
             platform/ec project, so the line becomes *&lt;project
             path="src/platform/ec" name="chromiumos/platform/ec"
@@ -45,10 +44,9 @@ Chromium OS chroot:
 4.  *repo sync -j &lt;number of cores on your workstatsion&gt;*
 5.  *./chromite/bin/cros_sdk* and enter your password for sudo if
             prompted
-6.  *./setup_board --board=$BOARD* (ex. *./setup_board --board=glados*)
-7.  *./build_packages --board=$BOARD chromeos-ec*
-8.  Now, EC images for any board can be built with *cd
-            ~/trunk/src/platform/ec; make BOARD=$board -j*
+6.  `cros build-packages --board=$BOARD chromeos-ec`
+7.  Now, EC images for any board can be built with
+    `cd ~/chromiumos/src/platform/ec; make BOARD=$board -j`
 
 ---
 
