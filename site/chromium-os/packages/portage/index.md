@@ -72,7 +72,7 @@ When doing an upgrade to a new version, you'll want to follow these steps:
         ```
 
     3.  Or talk to a [build team
-                member](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/contact.md#Public-discussion-groups)
+                member](/chromium-os/developer-library/guides/who-do-i-notify/contact/#Public-discussion-groups)
                 for help.
 2.  Once that branch has been created, you should rebase any existing
             CrOS changes we have onto it. This means the normal review & merge
@@ -94,10 +94,10 @@ When doing an upgrade to a new version, you'll want to follow these steps:
     $ ./chromite/bin/cros_sdk -r
     ```
 
-    Make sure `build_packages` can finish without using binary packages:
+    Make sure `cros build-packages` can finish without using binary packages:
 
-    ```none
-    $ ~/trunk/src/scripts/build_packages --board=amd64-generic --nousepkg
+    ```bash
+    $ cros build-packages --board=amd64-generic --no-usepkg
     ```
 
     This implicitly tests `update_chroot` and `setup_board`. Also, it makes sure

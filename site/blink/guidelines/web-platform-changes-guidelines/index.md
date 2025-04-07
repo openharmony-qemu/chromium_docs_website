@@ -8,32 +8,37 @@ page_name: web-platform-changes-guidelines
 title: Blink Values in Practice
 ---
 
+[TOC]
+
 ## Introduction
 
 The Blink project's [core values](/blink/guidelines/values) are to promote a
 useful and thriving web, while being a good user agent and safeguarding the
-openness of the web. We do this by shipping features that bring user benefit.
+openness of the web. Our primary lever for doing this is in deciding what
+features to ship or unship to our users, which benefits our users directly.
 
-Unlike many other platforms, the web has multiple implementations. The Blink
-project's primary lever for improving the experience of web users is by
-improving Chromium, and thus shipping (or unshipping) features to our users
-directly. But we strive to do so in a way that also helps other implementations.
-This increases the interoperable surface area of the web, which improves the
-experience of those users we do not directly serve, and helps safeguard the
-web's open nature.
+Unlike many other platforms, the web has multiple implementations, which is
+useful for maintaining its openness. Blink developers try their best to work
+with those other implementations to ship a consensus feature all at
+approximately the same time. When we can do this, the web platform moves forward
+smoothly.
 
+Other times, the priorities and values of the various implementations don't
+align so quickly.
 The Chromium project has been blessed with a large ecosystem of active
 contributors. As such, we can take on the responsibility of proving out features
 in our engine first, trialing them with users of Blink-based browsers ahead of
-general deployment across all engines and to more web users. While we do so, it
-is imperative that we deliver the feature in a way that invites broad feedback,
-and makes it easy for other engines to implement if they decide the proposal is
-valuable for their users.
+general deployment across all engines and to more web users. If other engines do
+then deploy the new features, this increases the interoperable surface area of
+the web, which improves the experience of those users we do not directly serve.
 
-This document outlines how the Blink project thinks about moving the web
-forward, and the reasoning behind the various processes and requirements we
-place on members of the Chromium community as part of the [launch
-process](/blink/launching-features) that puts our values into practice.
+For this to work, we have to ship each feature in a way that incorporates broad
+feedback and makes it easy for other engines to implement if and when they
+decide the feature is valuable for their users.
+
+This document describes how the Blink project uses and evaluates the
+requirements in our [launch process](/blink/launching-features) to ensure that
+new features put our values into practice.
 
 ## Finding balance
 
@@ -45,7 +50,12 @@ interoperability. And by definition, when any browser ships a new feature, the
 API change is not yet interoperable. So we need to balance some key risks while
 we improve the web platform.
 
-Interoperability risk is the risk that browsers will not eventually converge on
+<style>
+  dfn { font-weight: bold; font-style: normal; }
+</style>
+
+<dfn id="interoperability-risk">Interoperability risk</dfn> is the risk that
+browsers will not eventually converge on
 an interoperable implementation of the proposed feature. Interoperability cannot
 be determined only at a given point in time; since browsers ship features at
 different times, there is always a degree of non-interoperability on the web.
@@ -56,7 +66,8 @@ principles of
 interoperability](https://docs.google.com/document/d/1romO1kHzpcwTwPsCzrkNWlh0bBXBwHfUsCt98-CNzkY/edit)
 for a more in-depth discussion.
 
-Compatibility risk is the likelihood that a change will break existing web
+<dfn id="compatibility-risk">Compatibility risk</dfn> is the likelihood that a
+change will break existing web
 content loaded in Chromium. Compatibility risk is especially common with API
 removal, but it is also a factor when adding new features: before shipping, we
 need to be as sure as we reasonably can that the feature will not change or
@@ -173,39 +184,30 @@ benefits:
 
 * Specifications provide a mechanism for IPR coverage. The amount of coverage
   varies depending on specification venue, but most venues at the very least
-  guarantee that the specification writers' organization grants a patent
-  license to implement the specification.
-
-***Note:** the venue for a specification, and whether it is a "specification"
-(individual unofficial draft, W3C CG draft, TC39 stage 2...) or a "standard"
-(W3C Recommendation, WHATWG Living Standard, Ecma Standard, ...), only impacts
-the last of these bullet points. As such, it's most important that we write a
-good specification. The venue and formal status are helpful for gathering IPR
-coverage, but otherwise should not be a focus.*
+  guarantee that the specification writers' organizations grant a patent license
+  to implement the specification. Before shipping, we have to host the
+  specification somewhere with at least that minimal guarantee (e.g. a W3C CG,
+  TC39, an IETF Individual-Draft, etc.), and we have to offer to migrate it to a
+  standards track (e.g. W3C Recommendation, WHATWG Living Standard, Ecma
+  Standard, etc.), which would gather more IPR coverage. Beyond that, the choice
+  of venue doesn't affect our process.
 
 As such, Chromium developers must ensure that any feature they intend to ship is
-backed by a complete and thorough specification. This specification must be at
-the level of detail that the feature can be interoperably implemented in a
-second engine, should that engine want to bring the feature in question to their
-users.
+backed by a specification (and [tests](#tests)) that is complete and thorough
+enough that a second engine can get a good start on implementing the feature
+interoperably.
 
-Getting this right can be difficult. Generally, a prototype implementation comes
-before a specification, since it is easier to iterate on the prototype and
-gather real-world feedback that way. If such prototyping drastically changes the
-shape of the feature, or results in scrapping the feature altogether, this can
-save a lot of specification-writing time!
+The goal of a web _standard_ is to be clear enough to develop a new
+interoperable implementation based just on the standard, but it's impossible to
+be this thorough for features that haven't yet been implemented multiple times.
+We always expect the second implementers to find mistakes and areas of the
+specification that assume the context of the first implementation.
 
-But this ordering does have one disadvantage. Since there was never a point at
-which the Chromium engineer implemented the feature from scratch, following the
-specification, we never get a formal check that the specification is complete
-and detailed enough. This can lead to problems where, when a second
-implementation *does* try to implement from scratch, they find the specification
-incomplete, or find that the specification relies on Chromium-specific
-assumptions.
-
-To help address this, we have the [Chromium Specification
-Mentors](/blink/spec-mentors) program, which pairs Chromium developers with a
-trusted mentor to get a second set of eyes.
+Instead, we require that an experienced spec author be able to read the
+specification without finding aspects that would confuse a second implementer.
+To help get your specification to this level and check if it's there, we have
+the [Chromium Specification Mentors](/blink/spec-mentors) program, which pairs
+Chromium developers with a trusted mentor to get a second set of eyes.
 
 Finally, the most important part of specification writing is to keep up active
 maintenance of the specification even after Chromium ships the feature. This is
@@ -265,6 +267,43 @@ step in the process before shipping. The goal is to present a body of evidence
 that makes it easy for other engines to evaluate whether they would like to
 bring the proposal to their implementation, or not.
 
+### Browser engine reviews
+
+The Blink process requires most features to ask for [vendor
+signals](https://bit.ly/blink-signals) because they can give us some of the most
+direct indications of [interoperability risk](#interoperability-risk) and
+[specification](#specifications) quality. The feedback we get from the other
+vendors comes in several categories, which get different sorts of attention from
+the API owners.
+
+* *Spec quality*: When other implementers point out parts of the
+  [specification](#specifications) that are ambiguous or under-specified, the
+  feature team needs to work to fix those problems promptly. Fortunately, while
+  this type of issue takes developer time to fix, it doesn't in itself require
+  changes to the implementation and so usually doesn't delay shipping. These
+  problems can block the other implementer from doing a complete review, so more
+  issues will sometimes come up after the spec's quality is improved.
+* *Unimplementable designs*: Other implementers might also tell us that our
+  current design is either unimplementable on some operating systems or
+  incompatible with some browser architecture choices. These are serious
+  problems that can justify rethinking an API even after it's shipped.
+* *Ergonomic concerns*: Any reviewer, including other implementers, can notice
+  that an API might not work well enough for developers. Our [origin
+  trial](/blink/origin-trials) process is designed to catch this class of
+  problems before we get to the I2S stage, but it doesn't always. We have to
+  evaluate this feedback against any evidence we have, and try to find consensus
+  around one of the options. If this feedback comes up *after Chromium has
+  shipped* a feature, unless the feedback is obviously correct we can expect it
+  to include evidence from the developers who have been able to try the feature
+  with live traffic.
+* *Values disagreements*: Sometimes other implementers make different
+  tradeoffs about which Web features are worth adding. In these cases, we need
+  to work to fully explore the disagreement and try to find a compromise
+  that could enable all browsers to satisfy the use case. However, if no
+  compromise is found, and the feature significantly advances the Web even
+  without interoperability, the API owners will often approve it despite the
+  other browser engines' opposition.
+
 ### Wide review
 
 There are specific groups, usually in the specification ecosystem, which are
@@ -287,9 +326,6 @@ Other groups to consider are:
 * Chromium cross-functional review groups, such as the
   [security](/Home/chromium-security), privacy, permissions, and anti-tracking
   teams.
-
-* Directly reaching out to other browser engine implementers or standards
-  engineers for their [signals](https://docs.google.com/document/d/1xkHRXnFS8GDqZi7E0SSbR3a7CZsGScdxPUWBsNgo-oo/edit).
 
 None of these groups are obligated to respond; many are busy with other reviews
 or with their own work. But we always attempt to reach out, and respond to any
