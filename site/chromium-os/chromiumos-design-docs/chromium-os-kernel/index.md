@@ -16,7 +16,7 @@ This document outlines the overall design of the kernel, as it relates to
 Chromium OS.
 
 See also the [Frequently Asked Questions
-page](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/kernel_faq.md)
+page](/chromium-os/how-tos-and-troubleshooting/kernel-faq/)
 for more day-to-day details.
 
 ## Background
@@ -44,9 +44,9 @@ is specifically **not** to use these branches to keep changes that are shipping
 to customers.
 
 Any code submitted should be done as one Git commit per logical change, with a
-good description. (See
-[Documentation/SubmittingPatches](/chromium-os/chromiumos-design-docs/chromium-os-kernel/submitting-patches)
-in the kernel tree.) We may create temporary public branches for the purpose of
+good description.
+(See [submitting-patches](https://docs.kernel.org/process/submitting-patches.html#describe-your-changes).)
+We may create temporary public branches for the purpose of
 working together on code review and integration.
 
 ### Licensing

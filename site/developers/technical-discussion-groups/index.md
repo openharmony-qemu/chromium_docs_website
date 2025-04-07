@@ -52,6 +52,8 @@ title: Technical Discussion Groups
 *   [blink-network-dev](https://groups.google.com/a/chromium.org/forum/#!forum/blink-network-dev)
     *   Technical discussions about the web platform networking APIs -
                 covering XMLHttpRequest, Fetch API, Streams, WebSocket, etc.
+*   [build](https://groups.google.com/a/chromium.org/g/build)
+    *   Discussion of build-related issues for the Chromium browser
 *   [chromium-accessibility](https://groups.google.com/a/chromium.org/group/chromium-accessibility)
     *   The engineering (developer) team uses this to discuss technical
                 issues related to Chromium accessibility, including
@@ -86,7 +88,7 @@ title: Technical Discussion Groups
 *   [devtools-dev](https://groups.google.com/a/chromium.org/g/devtools-dev)
     *   Discussion forum for [Chrome
                 DevTools](https://developers.google.com/web/tools/chrome-devtools).
-*   [dom-dev](https://groups.google.com/a/chromium.org/forum/#!forum/dom-dev)
+*   [dom-dev](https://groups.google.com/a/google.com/g/dom-dev)
     *   List for technical discussions related to DOM, HTML, Forms, and
                 the [DOM Team](/teams/dom-team).
 *   [ecosystem-infra](https://groups.google.com/a/chromium.org/forum/#!forum/ecosystem-infra)
@@ -100,7 +102,7 @@ title: Technical Discussion Groups
 *   [experimentation-dev](https://groups.google.com/a/chromium.org/forum/#!forum/experimentation-dev)
     *   Discussion forum for experimenting with web platform features,
                 specifically [Origin
-                Trials](https://github.com/jpchase/OriginTrials/).
+                Trials](https://github.com/GoogleChrome/OriginTrials).
 *   [feature-control](https://groups.google.com/a/chromium.org/forum/#!forum/feature-control)
     *   Discussion relating to the infrastructure and APIs in chromium
                 that control the exposure of APIs to the web and reports on when

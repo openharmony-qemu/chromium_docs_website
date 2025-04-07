@@ -27,7 +27,14 @@ specification TAG review, unless one of the following apply:
   [TC39 stage 3](https://tc39.es/process-document/) or WebAssembly
   [phase 4](https://github.com/WebAssembly/proposals/blob/main/README.md#phase-4---standardize-the-feature-wg).
 
+* The intent is for WebDriver / WebDriver BiDi support for a feature already shipped in Chromium.
+
 * An exception was granted by consensus of the Blink API owners through a public
   communication. [Approval](/blink/guidelines/api-owners/procedures/) of an
   intent to ship by the Blink API owners with no TAG review implies such an
   exception.
+
+* An Early Design Review was performed by the TAG and the final specification
+does not differ in any significant way from the the form reviewed by the TAG.
+In this situation, a comment on the Early Design Review issue (no need to
+re-open the issue) linking to the specification suffices.

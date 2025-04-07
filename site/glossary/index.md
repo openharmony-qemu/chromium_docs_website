@@ -2,7 +2,5 @@
 breadcrumbs: []
 page_name: glossary
 title: GLOSSARY
+redirect: /chromium-os/developer-library/glossary/
 ---
-
-Moved to
-<https://chromium.googlesource.com/chromiumos/docs/+/HEAD/glossary.md>

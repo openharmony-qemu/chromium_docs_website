@@ -72,7 +72,7 @@ time; this is normal).
 
 [Include a policy](/developers/how-tos/enterprise/adding-new-policies) to
 control the new change, where possible. The specifics depend on the exact
-change, but here's a best practice that works for most disruptive changes
+change, but here's a best practice that works for most disruptive changes.
 
 Introduce a policy that can force the new behavior on or force the behavior
 off. If the policy is not set (i.e. for consumers), the behavior is defined
@@ -93,6 +93,14 @@ surprise to them. If the policy is temporary:
 - Consider introducing the policy a release before making any changes on
 default, so enterprises can opt-in to test it before the default behavior
 changes.
+- The policy must be added before the branch point of the milestone where it
+applies; it can't be merged in after branch point. This is because policies
+also must be added to management software that controls the browser, and the
+time between branch point and stable release makes this possible. As a
+Chromium developer, you don't need to take any action to add the policies to
+management software, you only need to create the Chromium policy in time.
+- Prefer simple policies like bools and enums, which can be ported to
+enterprise management software more easily.
 
 - Roll out the change using Finch, following the standard launch process (e.g.
 [process for blink](/blink/launching-features)). Any enterprise that's set the
@@ -100,6 +108,38 @@ policy will not see any change, since the policy overrides the Finch config.
 
 - If the policy was only intended as a temporary escape hatch, remove it in the
 milestone communicated.
+
+#### Can enterprise users set features directly?
+
+We do not encourage enterprise users to use features or flags. Here are some
+reasons why:
+
+1) Features are mostly designed for experimental purposes. They can be
+added, modified, or removed easily. Policies, on the other hand, are more stable
+ configurations. They require documentation for administrators and backward
+ compatibility support.
+2) Features always apply to the whole browser instance and need to be
+relaunched for any update. However, we encourage all policies to support
+`dynamic_refresh: true` and `per_profile: true` whenever possible. This allows
+policies to be updated without restarting the browser, and it also allows
+policies to be applied to individual profiles instead of the entire browser
+instance.
+3) Features may be controlled by chrome://flags or a command-line switch.
+However, these methods are difficult for administrators who control thousands of
+devices. Most administrators prefer to use a dedicated management tool, such as
+Group Policy Editor or admin.google.com, to manage Chrome. These tools can set
+enterprise policies easily, but they cannot set feature flags.
+
+A typical way to check a policy value together with a feature flag is to create
+a utility function that checks both. If the policy value conflicts with the
+feature flag setting, the policy value should always take precedence.
+
+```
+bool IsMyFeatureEnabled(Profile* profile) {
+  return profile->GetPrefs()->GetBoolean(prefs::kMyFeature)
+    && base::FeatureList::IsEnabled(features::kMyFeature);
+}
+```
 
 ### Need more help?
 

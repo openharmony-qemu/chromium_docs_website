@@ -11,7 +11,7 @@ title: System Hardening
 [TOC]
 
 Note: A practical guide for hardening individual services can be found
-[here](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/sandboxing.md).
+[here](/chromium-os/developer-library/guides/development/sandboxing/).
 
 ## Abstract
 
@@ -561,7 +561,7 @@ Phase 3 is where we get to explore additional innovations in the security space
 that will require the most long-term investment. We're excited about the
 possibilities around integrating new kernel and user space hardening techniques
 and figuring out how to properly isolate drivers in kernel-space.
-Here are some of the ideas we have, but there is a lot of area to research:
+Here are some of the ideas we have, but there are a lot of areas to research:
 
 *   Retrofit /sbin/init and remove root everywhere.
 *   Isolate all running Xorg windows in Xephyr transparently to mitigate
