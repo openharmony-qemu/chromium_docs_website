@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "website",
+        "License": "CC-BY-2.5",
+        "License File": "site/chromium-os/servo/LICENSE",
+        "Version Number": "be9c3dfd3781964fc0bab0d6c91d9ad117b71b02",
+        "Owner": "huamengzheng@huawei.com",
+        "Upstream URL": "https://chromium.googlesource.com/website.git@be9c3dfd3781964fc0bab0d6c91d9ad117b71b02",
+        "Description": "Chromium 文档网站"
+    }
+]
