@@ -26,7 +26,7 @@ pages](/developers/design-documents/displaying-a-web-page-in-chrome).
 ## Top-level projects
 
 When you [Browse and Search the Chromium Code](https://source.chromium.org/chromium)
-or [Checkout the Chromium Code](https://www.chromium.org/developers/how-tos/get-the-code/)
+or [Checkout the Chromium Code](/developers/how-tos/get-the-code/)
 you will notice a number of top-level directories:
 
 *   **android_webview:** Provides a facade over src/content suitable for
@@ -139,9 +139,9 @@ src="/developers/how-tos/getting-around-the-chrome-source-code/Content.png">](/d
                 top-level module. This should be merged with browser/net.
 *   **installer**: Source files and projects for making the installer
             (MSI package).
-*   ****renderer**: Chrome specific code that runs in the renderer
+*   **renderer**: Chrome specific code that runs in the renderer
             process. This adds Chrome features like autofill, translate etc to
-            the content module.**
+            the content module.
 *   **test**:
     *   **automation**: Used by tests to drive the browser UI, for
                 example, in `test/ui`, `test/startup`, etc. This communicates

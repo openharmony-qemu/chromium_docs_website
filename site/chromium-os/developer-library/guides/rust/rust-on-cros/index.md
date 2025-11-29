@@ -109,7 +109,7 @@ in sync, add a `files/chromeos-version.sh` script like this:
 
 # Assumes the first 'version =' line in the Cargo.toml is the version for the
 # crate.
-awk '/^version = / { print $3; exit }' "$1/<path/to/Cargo.toml>" | tr -d '"'
+awk '/^version = / { gsub(/"/, "", $0); print $3; exit }' "$1/<path/to/Cargo.toml>"
 ```
 
 Replace `<path/to/Cargo.toml>` with the path of `Cargo.toml` relative
@@ -302,5 +302,5 @@ export PKG_CONFIG_ALLOW_CROSS=1
 [rust]: https://www.rust-lang.org
 [crates.io]: https://crates.io
 [cros-rust.eclass]: https://chromium.googlesource.com/chromiumos/overlays/chromiumos-overlay/+/HEAD/eclass/cros-rust.eclass
-[cros_workon_make]: https://www.chromium.org/chromium-os/developer-library/guides/development/developer-guide/#make-your-changes
+[cros_workon_make]: /chromium-os/developer-library/guides/development/developer-guide/#make-your-changes
 [rust_crates_updating]: https://chromium.googlesource.com/chromiumos/third_party/rust_crates/+/HEAD/README.md#updating-packages
