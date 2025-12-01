@@ -246,7 +246,7 @@ always read-only.
 The Meltdown/Spectre vulnerabilities have implications for safely using [VM]s.
 We've applied fixes/mitigations to make sure [VM]s can't attack the host system
 or other [VM]s.
-See the [ChromiumOS wiki page](http://dev.chromium.org/chromium-os/meltdown-spectre-vulnerability-status)
+See the [ChromiumOS wiki page](/chromium-os/meltdown-spectre-vulnerability-status)
 for more details.
 
 ## Lifecycles
@@ -457,7 +457,7 @@ Currently, no (*).
 The containers are implemented using Linux [user namespaces] and those are quite
 restricted (by design).
 
-See the [FUSE support entry](#FUSE) for alternatives.
+See the [FUSE support entry](#is-fuse-supported) for alternatives.
 
 (*): Technically you can mount a few limited pseudo filesystems (like
 memory-backed tmpfs), but most people aren't interested in those.
@@ -476,7 +476,7 @@ See the [previous question about mounting filesystems](#can-i-mount-filesystems)
 Specifically, we're referring to `losetup` and `mount -o loop` which use
 `/dev/loop-control` and nodes like `/dev/loop0` via the `loop` kernel module.
 
-If you have a use case that wouldn't be solved by supporting [FUSE](#FUSE),
+If you have a use case that wouldn't be solved by supporting [FUSE](#is-fuse-supported),
 please [file a bug][new-bug] for us.
 
 ### Can I run a VM inside the VM?
@@ -948,7 +948,7 @@ Also, [we love turtles](https://en.wikipedia.org/wiki/Turtles_all_the_way_down).
 
 Yes.
 For more details, see our
-[public documentation](https://dev.chromium.org/chromium-os/containers-update).
+[public documentation](/chromium-os/containers-update).
 
 ### Can I delete containers I no longer want?
 
@@ -993,7 +993,7 @@ It's not that [crouton] is bad, it's simply a completely different model.
 [stable channel]: https://support.google.com/chromebook/answer/1086915
 [beta channel]: https://support.google.com/chromebook/answer/1086915
 [dev channel]: https://support.google.com/chromebook/answer/1086915
-[device list]: http://dev.chromium.org/chromium-os/developer-information-for-chrome-os-devices
+[device list]: /chromium-os/developer-library/reference/development/developer-information-for-chrome-os-devices
 [feedback-report]: https://support.google.com/chromebook/answer/2982029
 [known-bugs]: https://issuetracker.google.com/issues?q=componentid:960622
 [new-bug]: https://issuetracker.google.com/issues/new?component=960622&template=1758622

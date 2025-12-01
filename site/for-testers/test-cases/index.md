@@ -11,14 +11,10 @@ title: Test Cases
 
 ### Guidelines
 
-1.  Please make sure that you are on the dev channel. We have recently
-            refreshed the dev channel, so you will have to sign up for the dev
-            channel once again. Instructions for joining the dev channel are
-            here: <http://www.chromium.org/getting-involved/dev-channel/>.
-2.  Make sure you are running the latest version. You can find
-            information about Google Chrome versions here:
-            <http://www.chromium.org/getting-involved/dev-channel/release-notes>.
-3.  IMPORTANT: Before you begin testing, please [set up a new
+1.  Please make sure that you are on the dev channel. Instructions for joining
+    the dev channel are here:
+    <https://www.chromium.org/getting-involved/chrome-release-channels/>.
+2.  IMPORTANT: Before you begin testing, please [set up a new
             profile](/developers/creating-and-using-profiles). We strongly
             suggest that you use a separate profile folder for testing purposes
             so that the testing does not tamper with your existing profile and
@@ -27,18 +23,18 @@ title: Test Cases
                 [profile page](/developers/creating-and-using-profiles).
     2.  When you are done testing, you can edit the shortcut again to go
                 back to your original profile.
-4.  Please go through as many test cases as possible. Detailed
+3.  Please go through as many test cases as possible. Detailed
             description about the test cases is provided in the column on the
             left. Each test case should be answered with a 'Pass' or 'Fail'
-5.  Please try and associate a failing test case with a bug. It could be
+4.  Please try and associate a failing test case with a bug. It could be
             an existing bug or a new issue. Please refer to bug reporting
             guidelines here:
-            <http://www.chromium.org/for-testers/bug-reporting-guidelines>. Use
+            <https://www.chromium.org/for-testers/bug-reporting-guidelines>. Use
             the 'Other' response field in the test cases to include the bug
             numbers.
-6.  Please do not use this form to send us feature requests or
+5.  Please do not use this form to send us feature requests or
             information about unrelated crashes or bugs. Please file them
-            directly on <http://crbug.com> where they will be looked at along
+            directly on <https://crbug.com> where they will be looked at along
             with other bugs.
 
 ### Test cases
@@ -51,7 +47,7 @@ title: Test Cases
 *   Go to Chrome Menu -&gt; Options -&gt; Basic and click on 'Make
             Google Chrome my default browser'.
 *   Verification: Go to Start -&gt; Run and type and valid URL like
-            'http://www.google.com' in the run dialog. When you hit enter, it
+            'https://www.google.com' in the run dialog. When you hit enter, it
             should be opened in a new Google Chrome window.
 
 #### Test case: Default Browser (non-admin user)
@@ -62,7 +58,7 @@ title: Test Cases
 *   Go to Chrome Menu -&gt; Options -&gt; Basic and click on 'Make
             Google Chrome my default browser'.
 *   Verification: Go to Start -&gt; Run and type and valid URL like
-            'http://www.google.com' in the run dialog. When you hit enter, it
+            'https://www.google.com' in the run dialog. When you hit enter, it
             should be opened in a new Google Chrome window.
 
 #### Test case: Clear Browsing Data (time range 1-day)
@@ -97,7 +93,7 @@ title: Test Cases
 #### Test case: Find in Page (matches inside html pages, edit boxes, unicode text)
 
 *   Pre-conditions/setup: None.
-*   Navigate to a simple page such as <http://www.chromium.org/>. Hit
+*   Navigate to a simple page such as <https://www.chromium.org/>. Hit
             'Ctrl + F' Search for the word 'chromium'.
 *   Next, go to a website that has a text edit boxes (e.g. compose a
             message in GMail). Type the following text in that box: 'the quick
